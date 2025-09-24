@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@super-productivity/plugin-api": "^1.0.1"
+  }
+}
