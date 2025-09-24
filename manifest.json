@@ -1,0 +1,14 @@
+{
+  "id": "va-sync-plugin",
+  "name": "VA Sync Plugin",
+  "version": "1.0.0",
+  "description": "",
+  "manifestVersion": 1,
+  "minSupVersion": "14.0.2",
+  "author": "Marco Schwarz",
+  "homepage": "https://github.com/marco-swz/super-productivity-sync",
+  "iFrame": true,
+  "sidePanel": false,
+  "permissions": ["nodeExecution"],
+  "hooks": ["taskComplete", "taskUpdate", "currentTaskChange"]
+}

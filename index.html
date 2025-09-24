@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>My Plugin UI</title>
+
+    <!-- CSS must be inlined -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+
+        .task-list {
+            background: white;
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .task-item {
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+        }
+
+        button {
+            background: #4caf50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>My Plugin</h1>
+    <div id="content">
+        <button id="loadTasks">Load Tasks</button>
+        <div id="taskList" class="task-list"></div>
+    </div>
+
+    <!-- JavaScript must be inlined -->
+    <script>
+        document.getElementById('loadTasks').addEventListener('click', async () => {
+            try {
+                const tasks = await PluginAPI.getTasks();
+                const taskList = document.getElementById('taskList');
+
+                taskList.innerHTML = '<h3>Your Tasks:</h3>';
+
+                tasks.forEach((task) => {
+                    const taskEl = document.createElement('div');
+                    taskEl.className = 'task-item';
+                    taskEl.textContent = task.title;
+                    taskList.appendChild(taskEl);
+                });
+
+                PluginAPI.showSnack({
+                    msg: `Loaded ${tasks.length} tasks`,
+                    type: 'SUCCESS',
+                });
+            } catch (error) {
+                console.error('Error loading tasks:', error);
+                PluginAPI.showSnack({
+                    msg: 'Failed to load tasks',
+                    type: 'ERROR',
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
